@@ -11,7 +11,8 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git 'https://github.com/kavindideepashika26-max/student-api.git'
+                git branch: 'main',
+                url: 'https://github.com/kavindideepashika26-max/student-api.git'
             }
         }
 
