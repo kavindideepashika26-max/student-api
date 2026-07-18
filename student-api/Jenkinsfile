@@ -17,9 +17,12 @@ pipeline {
         }
 
         stage('Build') {
-            steps {
-                bat 'mvn clean package -DskipTests'
-            }
+    steps {
+        dir('student-api') {
+            bat 'mvn clean package -DskipTests'
+        }
+    }
+}
         }
 
         stage('Docker Build') {
