@@ -1,10 +1,9 @@
 pipeline {
-
     agent any
 
     tools {
         jdk 'jdk25'
-        maven 'Maven'
+        maven 'Maven3'
     }
 
     stages {
@@ -12,22 +11,23 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                url: 'https://github.com/kavindideepashika26-max/student-api.git'
+                    url: 'https://github.com/kavindideepashika26-max/student-api.git'
             }
         }
 
         stage('Build') {
-    steps {
-        dir('student-api') {
-            bat 'mvn clean package -DskipTests'
-        }
-    }
-}
+            steps {
+                dir('student-api') {
+                    bat 'mvn clean package -DskipTests'
+                }
+            }
         }
 
         stage('Docker Build') {
             steps {
-                bat 'docker build -t student-api .'
+                dir('student-api') {
+                    bat 'docker build -t student-api .'
+                }
             }
         }
     }
